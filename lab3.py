@@ -68,7 +68,14 @@ def mlParams(X, labels, W=None):
 
     # TODO: fill in the code to compute mu and sigma!
     # ==========================
-    
+    for jdx, cl in enumerate(classes):
+        idx = np.where(labels == cl)[0]
+        xlc = np.array(X[idx, :])
+        print(f"X: {X.shape}")
+        print(f"xlc: {xlc.shape}")
+        mu[jdx] = np.sum(xlc, axis=0) / xlc.shape[0]
+        # ==========================
+        sigma[jdx] = np.diag(np.sum(np.square(X[idx, :] - mu[jdx]), axis=0) / xlc.shape[0])
     # ==========================
 
     return mu, sigma
